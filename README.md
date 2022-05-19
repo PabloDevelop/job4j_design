@@ -33,4 +33,4 @@
 2.5.3 - LSP
 2.5.4 - ISP
 2.5.5 - DIP
-2.5.6 - Test questionsск по имени заявки.
+2.5.6 - Test questions
