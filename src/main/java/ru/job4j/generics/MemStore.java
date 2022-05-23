@@ -28,7 +28,7 @@ public final class MemStore<T extends Base> implements Store<T> {
         if (rsl) {
             storage.put(id, model);
         }
-        return false;
+        return rsl;
     }
 
     /**метод удаляет пару ключ-значение по id, который передается в метод
@@ -42,7 +42,7 @@ public final class MemStore<T extends Base> implements Store<T> {
         if (rsl) {
             storage.remove(id);
         }
-        return false;
+        return rsl;
     }
 
     /**метод возвращает объект по ключу, который равен id,
@@ -52,7 +52,6 @@ public final class MemStore<T extends Base> implements Store<T> {
      */
     @Override
     public T findById(String id) {
-        T t = storage.get(id);
-        return t != null ? t : null;
+        return storage.get(id);
     }
 }
