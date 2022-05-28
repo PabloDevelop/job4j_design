@@ -11,51 +11,56 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
 
     private int modCount = 0;
 
-    transient Node<E> first;
+    transient Node<E> head;
 
-    transient Node<E> last;
+    transient Node<E> tail;
 
     /**Принимает на вход значение.
-     * Присваивает узлу l значение last.
-     * Создает новый узел newNode с ссылками l и null (next)
-     * помещая в него значение.
-     * Устанавливает ссылку last на узел newNode.
-     * Если ссылка l = null, то устанавливает ссылку first
-     * на newNode, иначе устанавливает ссылку next на newNode.
+     * Если в списке отсутствуют ноды, то присваивает head и tail
+     * ссылки на новую ноду.
+     * Если в списке есть ноды, то через переменную tail перебирает их по очереди
+     * в цикле while пока next не будет null.
+     * Затем присваивает tail ссылку на новую ноду.
      * Инкрементирует size.
      * Инкрементирует modCount.
      * @param value
      */
     @Override
     public void add(E value) {
-        final Node<E> l = last;
-        final Node<E> newNode = new Node<>(l, value, null);
-        last = newNode;
-        if (l == null) {
-            first = newNode;
-        } else {
-            l.next = newNode;
+        final Node<E> newNode = new Node<>(value, null);
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+            size++;
+            modCount++;
+            return;
         }
+        Node<E> tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        tail.next = newNode;
         size++;
         modCount++;
     }
 
-    /**Принимает на вход индекс Node.
-     * Проверяет находится ли индекс в пределах размера листа.
-     * Присваивает узлу f ссылку на узел first.
-     * Проходами в цикле до индекса перерибает узлы и
-     * присваивает узлу f значение ссылки по индексу.
+    /**Принимает на вход индекс.
+     * Проверяет находится ли индекс в пределах размера списка.
+     * Сравнивая в цикле while пока count != index
+     * перебирает подряд ноды.
      * @param index
-     * @return элемент списка по индексу узла
+     * @return значение в ноде по индексу
      */
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Node<E> f = first;
-        for (int i = 0; i < index; i++) {
-            f = f.next;
+        Node<E> current = head;
+        int count = 0;
+        while (count != index) {
+            current = current.next;
+            count++;
         }
-        return f.item;
+        return current.item;
     }
 
     /**Во вложенном итераторе есть переменные:
@@ -67,7 +72,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            Node<E> cursor = first;
+            Node<E> cursor = head;
             int expectedModCount = modCount;
 
             /**Возвращает true, если курсор != null.
@@ -104,12 +109,10 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private static class Node<E> {
         E item;
         Node<E> next;
-        Node<E> prev;
 
-        Node(Node<E> prev, E element, Node<E> next) {
+        Node(E element, Node<E> next) {
             this.item = element;
             this.next = next;
-            this.prev = prev;
         }
     }
 }
