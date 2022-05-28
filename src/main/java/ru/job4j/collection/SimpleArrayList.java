@@ -14,10 +14,18 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         this.container = (T[]) new Object[capacity];
     }
 
+    /**Принимает на вход текущий размер контейнера.
+     * Увеличивает контейнера копируя его в новый
+     * с вместимостью = (текущая + 1) * 2
+     * @param containerLength
+     */
+    private void grow(int containerLength) {
+        container = Arrays.copyOf(container, container.length * 2);
+    }
+
     /**Принимает на вход объект.
-     * Проверяет, не равен ли размер массива его текущей вместимости.
-     * Если равен, то увеличивает массив копируя его в новый
-     * с вместимостью = текущая * 2 (аналог метода grow()).
+     * Проверяет, не равен ли размер массива текущему размер контейнера.
+     * Если равен, то вызывает метод grow() для размера контейнера.
      * Присваивает элементу массива по индексу значение объекта.
      * Увеличивает счетчик изменений массива на 1.
      * @param value
@@ -25,16 +33,15 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     @Override
     public void add(T value) {
       if (size >= container.length) {
-          container = Arrays.copyOf(container, container.length * 2);
+          grow(container.length + 1);
       }
       container[size++] = value;
       modCount++;
       }
 
     /**Принимает на вход объект и индекс.
-     * Проверяет, находится ли индекс в границах размера массива,
-     * если не находится, то кидает IndexOutOfBoundsException.
-     * Если true, то присвает элементу массива по индексу значение объекта.
+     * Присваивает переменной removedValue значение объекта по индексу.
+     * Присваивает элементу массива по индексу значение объекта.
      * Увеличивает счетчик изменений массива на 1.
      * @param index входящий индекс
      * @param newValue входящий объект
@@ -42,38 +49,37 @@ public class SimpleArrayList<T> implements SimpleList<T> {
      */
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, size);
-        T removedValue = container[index];
+        T removedValue = get(index);
         container[index] = newValue;
         modCount++;
         return removedValue;
     }
 
     /**Принимает на вход индекс.
-     * Проверяет, находится ли индекс в границах размера массива,
-     * если не находится кидает IndexOutOfBoundsException.
+     * Присваивает переменной removedValue значение объекта по индексу.
+     * Уменьшает размер массива на 1.
      * Проверяет, что значение входящего индекса меньше индекса последнего элемента.
      * Если true, то элементы копируются на один индекс влево.
      * Последнему элементу по индексу массива присваивается null.
-     * Уменьшает размер массива на 1.
      * Увеличивает счетчик изменений массива на 1.
      * @param index входящий индекс
      * @return возвращает удаляемый объект
      */
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, size);
-        T removedValue = container[index];
-        if ((size - 1) > index) {
-            System.arraycopy(container, index + 1, container, index, size - 1 - index);
+        T removedValue = get(index);
+        size--;
+        if (size > index) {
+            System.arraycopy(container, index + 1, container, index, size - index);
         }
-        container[size - 1] = null;
-        size -= 1;
+        container[size] = null;
         modCount++;
         return removedValue;
     }
 
-    /**Возвращает элемент массива по входящему индексу
+    /**Проверяет, находится ли индекс в границах размера массива,
+     * если не находится кидает IndexOutOfBoundsException.
+     * Возвращает элемент массива по входящему индексу
      * @param index входящий индекс
      * @return элемент по индексу
      */
@@ -103,34 +109,33 @@ public class SimpleArrayList<T> implements SimpleList<T> {
             int expectedModCount = modCount;
 
             /**Возвращает true, если курсор != размеру массива.
+             * Сравнивает внутреннюю константу изменений с счетчиком,
+             * если они не равны (массив изменяли во время работы итератора),
+             * то выкидывает ConcurrentModificationException.
              * @return true или false
              */
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return cursor != size;
             }
 
             /**Переменная i служит индексом для текущего элемента.
              * Проверяет, не равен ли текущий индекс размеру массива,
              * если равен, то выкидывает NoSuchElementException.
-             * Сравнивает внутреннюю константу изменений с счетчиком,
-             * если они не равны (массив изменяли во время работы итератора),
-             * то выкидывает ConcurrentModificationException.
              * Присваивает курсору значение текущего индекса + 1.
              * Возвращает элемент по текущему индексу.
              * @return элемент массива с текущим индексом
              */
             @Override
             public T next() {
-                int i = cursor;
-                if (i >= size) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-                cursor = i + 1;
-                return container[i];
+                cursor += 1;
+                return container[cursor - 1];
             }
         };
     }
