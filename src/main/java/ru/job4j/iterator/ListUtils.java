@@ -11,14 +11,8 @@ public class ListUtils {
      */
     public static <T> void addBefore(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            if (iterator.nextIndex() == index) {
-                iterator.add(value);
-                break;
-            }
-            iterator.next();
-        }
+        ListIterator<T> iterator = list.listIterator(index);
+        iterator.add(value);
     }
 
     /**Вставляет после индекса.
@@ -28,13 +22,8 @@ public class ListUtils {
      */
     public static <T> void addAfter(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> iterator = list.listIterator();
-        while (iterator.next() != null) {
-            if (iterator.previousIndex() == index) {
-            iterator.add(value);
-            break;
-            }
-        }
+        ListIterator<T> iterator = list.listIterator(index + 1);
+        iterator.add(value);
     }
 
     /**Удаляет все элементы, которые удовлетворяют предикату.
@@ -70,11 +59,11 @@ public class ListUtils {
      */
     public static <T> void removeAll(List<T> list, List<T> elements) {
         ListIterator<T> iteratorList = list.listIterator();
-        while (iteratorList.hasNext()) {
-            for (T elem : elements) {
-                if (iteratorList.next() == elem) {
-                    iteratorList.remove();
-                }
+        ListIterator<T> iteratorElem = elements.listIterator();
+        int minSize = Math.min(list.size(), elements.size());
+        for (int i = 0; i < minSize; i++) {
+            if (iteratorList.next() == iteratorElem.next()) {
+            iteratorList.remove();
             }
         }
     }
