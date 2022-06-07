@@ -25,7 +25,7 @@ public class SimpleMapTest {
 
     @Test
     public void whenPut() {
-        SimpleMap<Integer, String > map = new SimpleMap<>();
+        SimpleMap<Integer, String> map = new SimpleMap<>();
         map.put(1, "Vasya");
         map.put(5, "Petya");
         Assert.assertThat(map.get(1), is("Vasya"));
