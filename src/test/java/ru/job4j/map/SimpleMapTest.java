@@ -58,7 +58,7 @@ public class SimpleMapTest {
     public void whenIteratorHasNext() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         Iterator<Integer> it = map.iterator();
-        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(false));
     }
 
 
@@ -67,5 +67,20 @@ public class SimpleMapTest {
         SimpleMap<Integer, String> map = new SimpleMap<>();
         Iterator<Integer> it = map.iterator();
         it.next();
+    }
+
+    @Test
+    public void whenPutOverDefCapacity() {
+        SimpleMap<Integer, String> map = new SimpleMap<>();
+        map.put(40, "Vasya");
+        map.put(50, "Petya");
+        map.put(35, "Tolya");
+        map.put(55, "Tanya");
+        map.put(83, "Petr");
+        map.put(76, "Oleg");
+        map.put(15, "Nik");
+        map.put(81, "Den");
+        map.put(25, "Anya");
+        Assert.assertThat(map.get(25), is("Anya"));
     }
 }
