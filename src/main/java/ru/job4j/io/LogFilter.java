@@ -1,7 +1,6 @@
 package ru.job4j.io;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,9 +24,28 @@ public class LogFilter {
         return string;
     }
 
+    /** Метод принимает результат работы {@link #filter(String)}
+     * и ссылку на файл.
+     * Записывает полученный ArrayList из filter в файл.
+     * @param log
+     * @param file
+     */
+    public static void save(List<String> log, String file) {
+        try (PrintWriter out = new PrintWriter(
+                new BufferedOutputStream(
+                        new FileOutputStream(file)
+                ))) {
+            log.forEach(l -> out.write(l + System.lineSeparator()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter();
         List<String> log = logFilter.filter("log.txt");
-        System.out.println(log);
+        log.forEach(System.out::println);
+        save(log, "404.txt");
+        System.out.println("Log has saved to the file");
     }
 }
