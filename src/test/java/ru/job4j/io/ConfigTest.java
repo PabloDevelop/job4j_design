@@ -41,27 +41,6 @@ public class ConfigTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenExceptionWithoutValue() {
-        String path = "./io.data/key_without_pair.properties";
-        Config config = new Config(path);
-        config.load();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenExceptionWithoutKey() {
-        String path = "./io.data/value_without_pair.properties";
-        Config config = new Config(path);
-        config.load();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenExceptionWithoutKeyAndValues() {
-        String path = "./io.data/without_key_and_values.properties";
-        Config config = new Config(path);
-        config.load();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void whenExceptionWithoutEquals() {
         String path = "./io.data/without_equals.properties";
         Config config = new Config(path);
