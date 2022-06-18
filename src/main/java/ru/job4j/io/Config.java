@@ -28,7 +28,7 @@ public class Config {
                 if (!line.startsWith("#") && line.length() > 0) {
                     String[] splitlines = line.split("=", 2);
                     if (splitlines.length != 2 || line.startsWith("=")) {
-                        throw new IllegalArgumentException();
+                        throw new IllegalArgumentException("Wrong format!");
                     }
                     values.put(splitlines[0], splitlines[1]);
                 }

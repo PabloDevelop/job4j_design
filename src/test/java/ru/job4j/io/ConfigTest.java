@@ -53,4 +53,11 @@ public class ConfigTest {
         Config config = new Config(path);
         config.load();
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenExceptionWithoutKeyAndValue() {
+        String path = "./io.data/without_key_and_value.properties";
+        Config config = new Config(path);
+        config.load();
+    }
 }
