@@ -11,8 +11,8 @@ public class Analizy {
      * @param target имя путь к файлу результата анализа
      */
     public void unavailable(String source, String target) {
-        try (BufferedReader read = new BufferedReader(new FileReader(source))) {
-            try (PrintWriter out = new PrintWriter(
+        try (BufferedReader read = new BufferedReader(new FileReader(source));
+             PrintWriter out = new PrintWriter(
                     new BufferedOutputStream(
                             new FileOutputStream(target)
                     ))) {
@@ -29,9 +29,6 @@ public class Analizy {
             }
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
