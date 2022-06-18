@@ -27,7 +27,7 @@ public class Config {
                 String line = read.readLine();
                 if (!line.startsWith("#") && line.length() > 0) {
                     String[] splitlines = line.split("=", 2);
-                    if (splitlines.length != 2) {
+                    if (splitlines.length != 2 || line.startsWith("=")) {
                         throw new IllegalArgumentException();
                     }
                     values.put(splitlines[0], splitlines[1]);
