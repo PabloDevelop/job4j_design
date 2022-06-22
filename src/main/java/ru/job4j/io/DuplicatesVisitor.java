@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     Map<FileProperty, List<Path>> map = new HashMap<>();
@@ -25,7 +26,11 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         return super.visitFile(files, attrs);
     }
 
-    public Map<FileProperty, List<Path>> getPaths() {
-        return map;
+    public List<Path> getPaths() {
+        return map.values()
+                .stream()
+                .filter(p -> p.size() > 1)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 }
