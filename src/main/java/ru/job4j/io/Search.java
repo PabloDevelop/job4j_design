@@ -1,8 +1,6 @@
 package ru.job4j.io;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.annotation.Retention;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,12 +23,8 @@ public class Search {
     }
 
     public static boolean validate(String[] args) {
-        if (args.length == 0) {
+        if (args.length != 2 || !Files.exists(Paths.get(args[0])) || !args[1].startsWith(".")) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
-        } else if (!args[0].startsWith("./")) {
-            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
-        } else if (!args[1].startsWith(".")) {
-            throw new IllegalArgumentException("Wrong argument format. Try another one.");
         }
         return true;
     }
