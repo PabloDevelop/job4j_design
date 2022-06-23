@@ -24,7 +24,7 @@ public class Search {
 
     public static boolean validate(String[] args) {
         if (args.length != 2 || !Files.exists(Paths.get(args[0])) || !args[1].startsWith(".")) {
-            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+            throw new IllegalArgumentException("Wrong argument.");
         }
         return true;
     }
