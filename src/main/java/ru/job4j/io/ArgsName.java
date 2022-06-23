@@ -8,7 +8,7 @@ public class ArgsName {
 
     public String get(String key) {
         if (!values.containsKey(key)) {
-            throw new IllegalArgumentException("The key doesn't exist.");
+            throw new IllegalArgumentException("The key isn't exist.");
         }
         return values.get(key);
     }
@@ -22,12 +22,13 @@ public class ArgsName {
 
     public static List<String> validate(String args) {
         List<String> splitLines = new ArrayList<>();
-        if (args.startsWith("-") && args.length() > 0 && args.contains("=")) {
-            splitLines.add(args.split("=", 2)[0].split("-", 2)[1]);
-            splitLines.add(args.split("=", 2)[1]);
-            if (splitLines.get(0).isEmpty() || splitLines.get(1).isEmpty()) {
-                throw new IllegalArgumentException("Wrong data.");
-            }
+        if (!args.startsWith("-") || !args.contains("=")) {
+            throw new IllegalArgumentException("Wrong data.");
+        }
+        splitLines.add(args.split("=", 2)[0].split("-", 2)[1]);
+        splitLines.add(args.split("=", 2)[1]);
+        if (splitLines.get(0).isEmpty() || splitLines.get(1).isEmpty()) {
+            throw new IllegalArgumentException("Wrong data.");
         }
         return splitLines;
     }
