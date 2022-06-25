@@ -8,12 +8,15 @@ public class ArgsName {
 
     public String get(String key) {
         if (!values.containsKey(key)) {
-            throw new IllegalArgumentException("The key isn't exist.");
+            throw new IllegalArgumentException(key + "isn't exist.");
         }
         return values.get(key);
     }
 
     private void parse(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Array is empty.");
+        }
         for (String s : args) {
             List<String> parsedString = ArgsName.validate(s);
                 values.put(parsedString.get(0), parsedString.get(1));
@@ -21,14 +24,13 @@ public class ArgsName {
     }
 
     public static List<String> validate(String args) {
-        List<String> splitLines = new ArrayList<>();
+        List<String> splitLines;
         if (!args.startsWith("-") || !args.contains("=")) {
-            throw new IllegalArgumentException("Wrong data.");
+            throw new IllegalArgumentException(args + " doesn't contain \"-\" or \"=\"");
         }
-        splitLines.add(args.split("=", 2)[0].split("-", 2)[1]);
-        splitLines.add(args.split("=", 2)[1]);
+        splitLines = List.of(args.replace("-", "").split("=", 2));
         if (splitLines.get(0).isEmpty() || splitLines.get(1).isEmpty()) {
-            throw new IllegalArgumentException("Wrong data.");
+            throw new IllegalArgumentException("Key or value is empty.");
         }
         return splitLines;
     }

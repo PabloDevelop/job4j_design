@@ -50,4 +50,9 @@ public class ArgsNameTest {
     public void whenNoDash() {
         ArgsName jvm = ArgsName.of(new String[] {"enconding=UTF-8"});
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenArgsIsEmpty() {
+        ArgsName jvm = ArgsName.of(new String[0]);
+    }
 }
