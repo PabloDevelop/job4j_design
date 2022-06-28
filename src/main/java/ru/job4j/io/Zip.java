@@ -31,9 +31,8 @@ public class Zip {
     /**Проверяет входные аргументы на корректность.
      * Если параметры на корректны, то выкидывает исключение.
      * @param p результат работы ArgsName
-     * @return true
      */
-    private static boolean validation(ArgsName p) {
+    private static void validation(ArgsName p) {
         Path path = Path.of(p.get("d"));
         if (!path.toFile().exists()) {
             throw new IllegalArgumentException(path + " isn't exist.");
@@ -44,16 +43,14 @@ public class Zip {
         if (!p.get("o").endsWith(".zip")) {
             throw new IllegalArgumentException(p.get("o") + " is wrong argument.");
         }
-        return true;
     }
 
     public static void main(String[] args) throws IOException {
         ArgsName parametrs = ArgsName.of(args);
-        if (Zip.validation(parametrs)) {
-            List<Path> list = Search.search(Path.of(parametrs.get("d")),
-                    p -> !p.toFile().getName().endsWith(parametrs.get("e")));
-            Zip zip = new Zip();
-            zip.packFiles(list, Path.of(parametrs.get("o")));
-        }
+        Zip.validation(parametrs);
+        List<Path> list = Search.search(Path.of(parametrs.get("d")),
+                p -> !p.toFile().getName().endsWith(parametrs.get("e")));
+        Zip zip = new Zip();
+        zip.packFiles(list, Path.of(parametrs.get("o")));
     }
 }
