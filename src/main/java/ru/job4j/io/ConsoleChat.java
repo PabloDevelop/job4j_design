@@ -25,14 +25,14 @@ public class ConsoleChat {
         String question = input.nextLine();
         String status = CONTINUE;
         List<String> answers = readPhrases();
-        while (status.equals(CONTINUE) || status.equals(STOP)) {
+        while (CONTINUE.equals(status) || STOP.equals(status)) {
             log.add(question);
-            if (checkStatus(question).contains(OUT)) {
+            if (OUT.contains(checkStatus(question))) {
                 saveLog(this.log);
                 System.out.println("-Чат закрыт-");
                 input.close();
                 status = OUT;
-            } else if (checkStatus(question).contains(STOP) || status.contains(STOP)) {
+            } else if (STOP.contains(checkStatus(question)) || STOP.contains(status)) {
                 question = input.nextLine();
                 status = STOP;
             } else {
