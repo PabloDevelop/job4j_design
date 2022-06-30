@@ -24,6 +24,7 @@ public class ConsoleChat {
         System.out.println("-Чат открыт-");
         String question = input.nextLine();
         String status = CONTINUE;
+        List<String> answers = readPhrases();
         while (status.equals(CONTINUE) || status.equals(STOP)) {
             log.add(question);
             if (checkStatus(question).contains(OUT)) {
@@ -35,7 +36,7 @@ public class ConsoleChat {
                 question = input.nextLine();
                 status = STOP;
             } else {
-                String answer = readPhrases().get(new Random().nextInt(readPhrases().size()));
+                String answer = answers.get(new Random().nextInt(answers.size()));
                 log.add(answer);
                 System.out.println(answer);
                 question = input.nextLine();
