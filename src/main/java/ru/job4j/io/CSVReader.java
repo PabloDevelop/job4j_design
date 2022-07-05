@@ -33,7 +33,7 @@ public class CSVReader {
                 }
                 result.append(str);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
@@ -74,7 +74,7 @@ public class CSVReader {
      * @param stringBuilder выводимая информация
      */
     private static void writeOut(String outParameter, StringBuilder stringBuilder) {
-        if ("stdout".contains(outParameter)) {
+        if ("stdout".equals(outParameter)) {
             System.out.println(stringBuilder.toString());
         } else {
             try (PrintWriter out = new PrintWriter(
