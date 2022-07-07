@@ -19,7 +19,6 @@ public class EchoServer {
                         server.close();
                         break;
                     } else if (str.contains("/msg=Hello")) {
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         out.write("Hello, dear friend.".getBytes());
                     } else {
                         out.write("What".getBytes());
