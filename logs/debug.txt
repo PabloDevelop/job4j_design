@@ -1,0 +1,5 @@
+2022-07-09 22:05:13,753 DEBUG ru.job4j.io.UsageLog4j:main:12 - debug message
+2022-07-09 22:05:13,753  INFO ru.job4j.io.UsageLog4j:main:13 - info message
+2022-07-09 22:05:13,754  WARN ru.job4j.io.UsageLog4j:main:14 - warn message
+2022-07-09 22:05:13,754 ERROR ru.job4j.io.UsageLog4j:main:15 - error message
+2022-07-09 22:05:13,755  INFO ru.job4j.io.UsageLog4j:main:24 - User info age : 33, foot length : 1.82, hair count : 0.32, fingers count : 1000000000, race : 10, sex : true, salary : M
