@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<store open="false" price="45">
+    <good title="Bread"/>
+    <cashBoxes>
+        <cashBox>3 people</cashBox>
+        <cashBox>4 people</cashBox>
+    </cashBoxes>
+</store>
