@@ -1,12 +1,23 @@
 package ru.job4j.io;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+@XmlRootElement(name = "store")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Store {
-    private final boolean open;
-    private final int price;
-    private final Good good;
-    private final String[] cashBoxes;
+
+    @XmlAttribute
+    private boolean open;
+    private Good good;
+    private int price;
+
+    @XmlElementWrapper
+    @XmlElement(name = "stand_in_line")
+    private String[] cashBoxes;
+
+    public Store() {
+    }
 
     public Store(boolean open, int price, Good good, String[] cashBoxes) {
         this.open = open;

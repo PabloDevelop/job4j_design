@@ -1,7 +1,17 @@
 package ru.job4j.io;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "good")
 public class Good {
-    private final String title;
+
+    @XmlAttribute
+    private String title;
+
+    public Good() {
+
+    }
 
     @Override
     public String toString() {
