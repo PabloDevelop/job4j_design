@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import org.json.JSONPropertyIgnore;
+
 import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
@@ -30,6 +32,7 @@ public class Store {
         return open;
     }
 
+//    @JSONPropertyIgnore
     public Good getGood() {
         return good;
     }

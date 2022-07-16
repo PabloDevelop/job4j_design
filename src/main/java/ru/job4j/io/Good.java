@@ -13,14 +13,18 @@ public class Good {
 
     }
 
+    public Good(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     @Override
     public String toString() {
         return "Good{"
                 + "title='" + title + '\''
                 + '}';
-    }
-
-    public Good(String title) {
-        this.title = title;
     }
 }
