@@ -32,7 +32,6 @@ public class Store {
         return open;
     }
 
-//    @JSONPropertyIgnore
     public Good getGood() {
         return good;
     }
