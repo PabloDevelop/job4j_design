@@ -26,6 +26,22 @@ public class Store {
         this.cashBoxes = cashBoxes;
     }
 
+    public boolean isOpen() {
+        return open;
+    }
+
+    public Good getGood() {
+        return good;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String[] getCashBoxes() {
+        return cashBoxes;
+    }
+
     @Override
     public String toString() {
         return "Store{"
