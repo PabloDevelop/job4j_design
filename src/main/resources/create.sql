@@ -3,7 +3,7 @@ create table tasks(
     title varchar(255),
     task text,
     deadline timestamptz
-)
+);
 
 insert into tasks(title, task, deadline) values('Провести совещание',
                                                'О космическом мусоре',
