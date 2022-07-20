@@ -1,6 +1,6 @@
 create table osobie_primeti(
     id serial primary key,
-    title text;
+    title text
 );
 
 create table persons(
