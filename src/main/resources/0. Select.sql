@@ -5,11 +5,11 @@ create table fauna (
     discovery_date date
 );
 
-insert into fauna(name, avg_age, discovery_date) values ('line', 20, '08-Jan-1999');
-insert into fauna(name, avg_age, discovery_date) values ('fish', 1, '08-Jan-1700');
-insert into fauna(name, avg_age, discovery_date) values ('bird', 10, '08-Jan-1800');
+insert into fauna(name, avg_age, discovery_date) values ('line', 20, '1999-01-08');
+insert into fauna(name, avg_age, discovery_date) values ('fish', 1, '1700-01-08');
+insert into fauna(name, avg_age, discovery_date) values ('bird', 10, '1800-01-08');
 
-select * from fauna where name = 'fish';
+select * from fauna where name like '%fish%';
 select * from fauna where avg_age < 21000 and avg_age > 10000;
 select * from fauna where discovery_date is null;
-select * from fauna where discovery_date < '01-Jan-1950';
+select * from fauna where discovery_date < '1950-01-01';
