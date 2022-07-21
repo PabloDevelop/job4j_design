@@ -1,10 +1,16 @@
+create table users(
+    id serial primary key,
+    name varchar(255),
+    roles_id int references role(id)
+);
+
 create table role(
-    id serial primary key;
+    id serial primary key,
     title varchar(255)
 );
 
 create table rules(
-    id serial primary key;
+    id serial primary key,
     title varchar(255)
 );
 
@@ -30,7 +36,7 @@ create table comments(
 
 create table attachs(
     id serial primary key,
-    numbers int.
+    numbers int,
     items_id int references item(id)
 );
 
