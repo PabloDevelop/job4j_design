@@ -20,6 +20,8 @@ insert into people(name) values ('Vasya'), ('Petya'), ('Sasha');
 insert into devices_people(people_id, device_id) values (1, 1), (1, 2), (1, 3),
 (2, 1), (2, 2), (3, 1);
 
+select avg(price) from devices;
+
 select p.name, avg(dev.price)
 from people p
 join devices_people dp on dp.people_id=p.id
