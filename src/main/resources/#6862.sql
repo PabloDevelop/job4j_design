@@ -12,12 +12,12 @@ create table employees(
 create table teens(
     name varchar(255),
     gender varchar(255)
-)
+);
 
 insert into departments(name)
 values ('IT'), ('Finance'), ('Logistic'), ('Advisory');
 insert into employees(name, department_id)
-values ('Vasya', 1), ('Vanya', 2), ('Olya', 3), ('Petya');
+values ('Vasya', 1), ('Vanya', 2), ('Olya', 3);
 insert into teens(name, gender) values ('Vanya', 'm'), ('Vasya', 'm'), ('Petya', 'm'),
 ('Olya', 'f'), ('Masha', 'f'), ('Tanya', 'f');
 
