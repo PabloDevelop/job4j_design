@@ -1,0 +1,4 @@
+Petr Arsentev;parsentev@yandex.ru;
+Ivan Ivanov;iivanov@gmail.com;
+Olya Semenova;semenova@yandex.ru;
+Kirill Petrov;petrov@mail.ru;
