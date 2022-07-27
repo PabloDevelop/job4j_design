@@ -78,7 +78,8 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
-        try (InputStream in = new FileInputStream("./src/main/resources/app1.properties")) {
+        try (InputStream in = ImportDB.class.getClassLoader().getResourceAsStream("app1.properties")) {
+
             cfg.load(in);
             System.out.println("Parameters have loaded.");
         }
