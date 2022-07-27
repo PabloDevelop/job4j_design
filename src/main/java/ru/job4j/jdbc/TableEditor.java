@@ -35,8 +35,7 @@ public class TableEditor implements AutoCloseable {
     public void createTable(String tableName) {
         try (Statement statement = connection.createStatement()) {
             String sql = String.format(
-                    "create table if not exists"
-                            + " "
+                    "create table if not exists "
                             + tableName
                             + "(%s, %s);",
                     "id serial primary key",
@@ -53,8 +52,7 @@ public class TableEditor implements AutoCloseable {
      */
     public void dropTable(String tableName) {
         try (Statement statement = connection.createStatement()) {
-            String sql = "DROP TABLE"
-                    + " "
+            String sql = "DROP TABLE "
                     + tableName;
             statement.execute(sql);
         } catch (SQLException e) {
