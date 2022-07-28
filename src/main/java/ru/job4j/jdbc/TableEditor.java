@@ -16,6 +16,17 @@ public class TableEditor implements AutoCloseable {
         initConnection();
     }
 
+    /**Создает statement, выполняет sql-запрос.
+     * @param sql строкое представление sql-запроса
+     */
+    public void getStatement(String sql) {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**Создает подключение используя параметры из файла
      * через класс Properties и присваивает его полю connection.
      * @throws ClassNotFoundException
@@ -33,31 +44,15 @@ public class TableEditor implements AutoCloseable {
      * @param tableName
      */
     public void createTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "create table if not exists "
-                            + tableName
-                            + "(%s, %s);",
-                    "id serial primary key",
-                    "name varchar(255)"
-            );
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getStatement(String.format("create table if not exists %s(%s, %s);",
+                tableName, "id serial primary key", "name varchar(255)"));
     }
 
     /**Удаляет таблицу по указанному имени.
      * @param tableName
      */
     public void dropTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = "DROP TABLE "
-                    + tableName;
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getStatement(String.format("DROP TABLE %s", tableName));
     }
 
     /**Добавляет столбец в таблицу.
@@ -66,17 +61,7 @@ public class TableEditor implements AutoCloseable {
      * @param type
      */
     public void addColumn(String tableName, String columnName, String type) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = "ALTER TABLE "
-                    + tableName
-                    + " ADD "
-                    + columnName
-                    + " "
-                    + type;
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getStatement(String.format("ALTER TABLE %s ADD %s %s", tableName, columnName, type));
     }
 
     /**Удаляет столбец из таблицы.
@@ -84,15 +69,7 @@ public class TableEditor implements AutoCloseable {
      * @param columnName
      */
     public void dropColumn(String tableName, String columnName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = "ALTER TABLE "
-                    + tableName
-                    + " DROP COLUMN "
-                    + columnName;
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getStatement(String.format("ALTER TABLE %s DROP COLUMN %s", tableName, columnName));
     }
 
     /**Переименовывает столбец.
@@ -101,17 +78,8 @@ public class TableEditor implements AutoCloseable {
      * @param newColumnName
      */
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = "ALTER TABLE "
-                    + tableName
-                    + " RENAME COLUMN "
-                    + columnName
-                    + " TO "
-                    + newColumnName;
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getStatement(String.format("ALTER TABLE %s RENAME COLUMN %s TO %s",
+                tableName, columnName, newColumnName));
     }
 
     /**Выводит на консоль текущую схему таблицы.
@@ -150,17 +118,18 @@ public class TableEditor implements AutoCloseable {
         Properties config = new Properties();
         try (InputStream fis = new FileInputStream("./src/main/resources/app.properties")) {
             config.load(fis);
-            TableEditor testTable = new TableEditor(config);
-            testTable.createTable("testDB");
-            System.out.println(getTableScheme(testTable.connection, "testDB"));
-            testTable.addColumn("testDB", "date", "date");
-            System.out.println(getTableScheme(testTable.connection, "testDB"));
-            testTable.dropColumn("testDB", "date");
-            System.out.println(getTableScheme(testTable.connection, "testDB"));
-            testTable.renameColumn("testDB", "id", "index");
-            System.out.println(getTableScheme(testTable.connection, "testDB"));
-            testTable.dropTable("testDB");
-            System.out.println(getTableScheme(testTable.connection, "testDB"));
+            try (TableEditor testTable = new TableEditor(config)) {
+                testTable.createTable("testDB");
+                System.out.println(getTableScheme(testTable.connection, "testDB"));
+                testTable.addColumn("testDB", "date", "date");
+                System.out.println(getTableScheme(testTable.connection, "testDB"));
+                testTable.dropColumn("testDB", "date");
+                System.out.println(getTableScheme(testTable.connection, "testDB"));
+                testTable.renameColumn("testDB", "id", "index");
+                System.out.println(getTableScheme(testTable.connection, "testDB"));
+                testTable.dropTable("testDB");
+                System.out.println(getTableScheme(testTable.connection, "testDB"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
