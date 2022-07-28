@@ -31,7 +31,8 @@ public class ImportDB {
                 String line = rd.readLine();
                 if (line.length() > 0) {
                     String[] splitlines = line.split(";", 2);
-                    if (splitlines.length != 2 || line.startsWith(";")) {
+                    if (splitlines.length != 2 || line.startsWith(";")
+                            || splitlines[0].isBlank() || splitlines[1].isBlank()) {
                         throw new IllegalArgumentException("Wrong format!");
                     }
                     users.add(new User(splitlines[0], splitlines[1].replace(";", " ")));
@@ -79,7 +80,6 @@ public class ImportDB {
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
         try (InputStream in = ImportDB.class.getClassLoader().getResourceAsStream("app1.properties")) {
-
             cfg.load(in);
             System.out.println("Parameters have loaded.");
         }
