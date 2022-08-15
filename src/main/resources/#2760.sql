@@ -32,15 +32,20 @@ insert into person(id, name, company_id) values (12, 'Dima', 3);
 insert into person(id, name, company_id) values (13, 'Sonya', 4);
 insert into person(id, name, company_id) values (14, 'Katya', 4);
 insert into person(id, name, company_id) values (15, 'Andrey', 5);
+insert into person(id, name, company_id) values (16, 'Lev', 2);
 
 select p.name name, c.name company
 from person p left
 join company c on p.company_id = c.id
 where c.id != 5;
 
-select c.name company_name, count(p.company_id) employees_count
+with h as (select c.name, count(p.company_id) employees_count
 from company c
 inner join person p on p.company_id = c.id
-group by c.name
-order by c.name
-FETCH FIRST 1 ROWS WITH TIES;
+group by c.name)
+select *
+from h
+where h.employees_count = (
+    select max(h.employees_count)
+    from h
+);
