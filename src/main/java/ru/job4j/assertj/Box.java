@@ -23,7 +23,8 @@ public class Box {
             vertex = -1;
         }
         if (edge <= 0) {
-            vertex = -1; type = UNKNOWN;
+            vertex = -1;
+            type = UNKNOWN;
         }
     }
 
@@ -51,7 +52,6 @@ public class Box {
 
     public static void main(String[] args) {
         Box box = new Box(8, 12);
-        double area = box.getArea();
-        System.out.println(area);
+        System.out.println(box.getArea());
     }
 }
