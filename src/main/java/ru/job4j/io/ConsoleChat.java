@@ -88,7 +88,7 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat("./io.data/log.txt", "./io.data/answers.txt");
+        ConsoleChat cc = new ConsoleChat("./io.data/SerialGC.txt", "./io.data/answers.txt");
         cc.run();
     }
 }
