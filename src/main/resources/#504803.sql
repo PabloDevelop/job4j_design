@@ -42,10 +42,9 @@ create or replace function history_insert()
     returns trigger as
 $$
     BEGIN
-        insert into history_of_price(name, price, date)
-        select products.name, products.price, now()
-        from products;
-        return new;
+    insert into history_of_price(name, price, date)
+    values (NEW.name, NEW.price, now());
+    return new;
     END;
 $$
 LANGUAGE 'plpgsql';
