@@ -9,30 +9,27 @@ create table products (
 insert into products(name, producer, count, price) values ('TV', 'Sony', 100, 10000);
 insert into products(name, producer, count, price) values ('Bed', 'Ikea', 150, 2500);
 insert into products(name, producer, count, price) values ('Shirt', 'Zara', 200, 100);
+insert into products(name, producer, count, price) values ('Suit', 'Bolshevichka', 0, 15000);
 
--- Процедура удаляет стрку если колиество товара == 0
-create or replace procedure delete_good(u_count integer, u_id integer)
+-- Функция удаляет строку по id если количество товара == 0
+create or replace procedure delete_good(u_id integer)
 language 'plpgsql'
 as $$
     BEGIN
-        if u_count = 0 THEN
-            delete from products where id = u_id;
-        end if;
+        delete from products where id = u_id and count = 0;
     END;
 $$;
 
-call delete_good(0, 1);
+call delete_good(4);
 
--- Функция удаляет строку если id товара > 0
-create or replace function delete_good(u_id integer)
+-- Функция удаляет строку по id если количество товара == 0
+create or replace function delete_good1(u_id integer)
 returns void
 language 'plpgsql'
 as $$
     BEGIN
-        if u_id > 0 THEN
-            delete from products where id = u_id;
-        end if;
+        delete from products where id = u_id and count = 0;
     END;
 $$;
 
-select delete_good(2);
+select delete_good(5);
