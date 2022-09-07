@@ -33,7 +33,7 @@ DECLARE
 
 MOVE FORWARD 20 FROM cursor_products;
 
-MOVE BACKWARD 20 FROM cursor_products;
+FETCH BACKWARD 20 FROM cursor_products;
 
 CLOSE cursor_products;
 
