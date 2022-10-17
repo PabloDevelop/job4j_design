@@ -12,20 +12,19 @@ class GeneratorTest {
     @Disabled
     @Test
     public void whenReturnSuccess() {
-        Generator generator = new Generator();
+        Generator generator = new GeneratorUsable();
         String template = "I am a ${name}, Who are ${subject}? ";
         HashMap<String, String> newMap = new HashMap<>();
         newMap.put("name", "Petr Arsentev");
         newMap.put("subject", "you");
         String rsl = generator.produce(template, newMap);
-        String expected = "I am a Petr Arsentev, Who are you? ";
-        assertThat(rsl).isEqualTo(expected);
+        assertThat(rsl).isEqualTo("I am a Petr Arsentev, Who are you? ");
     }
 
     @Disabled
     @Test
     public void whenKeysIsNotInMap() {
-        Generator generator = new Generator();
+        Generator generator = new GeneratorUsable();
         String template = "I am a ${name}, Who are ${subject}? ";
         HashMap<String, String> newMap = new HashMap<>();
         newMap.put("name", "Petr Arsentev");
@@ -38,7 +37,7 @@ class GeneratorTest {
     @Disabled
     @Test
     public void whenKeysIsNotInTemplate() {
-        Generator generator = new Generator();
+        Generator generator = new GeneratorUsable();
         String template = "I ${be_form} a ${name}, Who are ${subject}? ";
         HashMap<String, String> newMap = new HashMap<>();
         newMap.put("name", "Petr Arsentev");
