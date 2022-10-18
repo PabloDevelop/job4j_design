@@ -9,7 +9,6 @@ import java.util.HashMap;
 @Disabled
 class GeneratorTest {
 
-    @Disabled
     @Test
     public void whenReturnSuccess() {
         Generator generator = new GeneratorUsable();
@@ -21,9 +20,8 @@ class GeneratorTest {
         assertThat(rsl).isEqualTo("I am a Petr Arsentev, Who are you? ");
     }
 
-    @Disabled
     @Test
-    public void whenKeysIsNotInMap() {
+    public void whenInMapAreMoreKeys() {
         Generator generator = new GeneratorUsable();
         String template = "I am a ${name}, Who are ${subject}? ";
         HashMap<String, String> newMap = new HashMap<>();
@@ -34,7 +32,6 @@ class GeneratorTest {
                 () -> generator.produce(template, newMap));
     }
 
-    @Disabled
     @Test
     public void whenKeysIsNotInTemplate() {
         Generator generator = new GeneratorUsable();
