@@ -11,7 +11,6 @@ import java.util.List;
 @Disabled
 public class CinemaTest {
 
-    @Disabled
     @Test
     public void whenBuy() {
         Account account = new AccountCinema();
@@ -21,7 +20,6 @@ public class CinemaTest {
         assertThat(ticket).isEqualTo(new Ticket3D());
     }
 
-    @Disabled
     @Test
     public void whenFind() {
         Cinema cinema = new Cinema3D();
@@ -30,7 +28,6 @@ public class CinemaTest {
         assertThat(sessions).isNull();
     }
 
-    @Disabled
     @Test()
     public void whenInvalidRow() {
         Account account = new AccountCinema();
@@ -41,7 +38,6 @@ public class CinemaTest {
         });
     }
 
-    @Disabled
     @Test()
     public void whenInvalidColumn() {
         Account account = new AccountCinema();
@@ -52,7 +48,6 @@ public class CinemaTest {
         });
     }
 
-    @Disabled
     @Test()
     public void whenInvalidDate() {
         Account account = new AccountCinema();
@@ -60,11 +55,10 @@ public class CinemaTest {
         Calendar date = Calendar.getInstance();
         date.set(2025, Calendar.DECEMBER, 25);
         assertThrows(IllegalArgumentException.class, () -> {
-            cinema.buy(account, 1, -1, date);
+            cinema.buy(account, 1, 1, date);
         });
     }
 
-    @Disabled
     @Test()
     public void whenPlaceTaken() {
         Account account = new AccountCinema();
@@ -72,7 +66,7 @@ public class CinemaTest {
         Calendar date = Calendar.getInstance();
         cinema.buy(account, 1, -1, date);
         assertThrows(IllegalArgumentException.class, () -> {
-            cinema.buy(account, 1, -1, date);
+            cinema.buy(account, 1, 1, date);
         });
     }
 }
