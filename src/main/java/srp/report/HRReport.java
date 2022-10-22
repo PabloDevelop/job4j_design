@@ -24,7 +24,7 @@ public class HRReport implements Report {
                 .append(System.lineSeparator());
         store.findBy(filter)
                 .stream()
-                .sorted(Comparator.comparingDouble(Employee::getSalary))
+                .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
                 .forEach(employee -> {
             text.append(employee.getName()).append(";")
                     .append(employee.getSalary()).append(";")
