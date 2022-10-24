@@ -3,33 +3,32 @@ package srp.report;
 import srp.formatter.DateTimeParser;
 import srp.model.Employee;
 import srp.store.Store;
+
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.function.Predicate;
 
-public class HRReport implements Report {
+public class DevReport implements Report {
 
-    private final Comparator<Employee> comparator;
     private final Store store;
+    private final DateTimeParser<Calendar> dateTimeParser;
 
-    public HRReport(Store store, Comparator comparator) {
+    public DevReport(Store store, DateTimeParser<Calendar> dateTimeParser) {
         this.store = store;
-        this.comparator = comparator;
+        this.dateTimeParser = dateTimeParser;
     }
 
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
-        text.append("Name; Salary;")
+        text.append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator());
-        store.findBy(filter)
-                .stream()
-                .sorted(comparator)
-                .forEach(employee -> {
+        for (Employee employee : store.findBy(filter)) {
             text.append(employee.getName()).append(";")
+                    .append(dateTimeParser.parse(employee.getHired())).append(";")
+                    .append(dateTimeParser.parse(employee.getFired())).append(";")
                     .append(employee.getSalary()).append(";")
                     .append(System.lineSeparator());
-        });
+        }
         return text.toString();
     }
 }

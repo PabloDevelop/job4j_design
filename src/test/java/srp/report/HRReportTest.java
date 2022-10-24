@@ -1,12 +1,11 @@
 package srp.report;
 
 import org.junit.jupiter.api.Test;
-import srp.formatter.DateTimeParser;
-import srp.formatter.ReportDateTimeParser;
 import srp.model.Employee;
 import srp.store.MemStore;
 import static org.assertj.core.api.Assertions.*;
 import java.util.Calendar;
+import java.util.Comparator;
 
 public class HRReportTest {
     @Test
@@ -16,11 +15,10 @@ public class HRReportTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         Employee worker1 = new Employee("Vasiliy", now, now, 150);
         Employee worker2 = new Employee("Oleg", now, now, 120);
-        DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         store.add(worker);
         store.add(worker1);
         store.add(worker2);
-        Report engine = new HRReport(store, parser);
+        Report engine = new HRReport(store, Comparator.comparingDouble(Employee::getSalary).reversed());
         StringBuilder expect = new StringBuilder()
                 .append("Name; Salary;")
                 .append(System.lineSeparator())
