@@ -1,4 +1,4 @@
-package srp.currency;
+package ru.job4j.srp.currency;
 
 public class InMemoryCurrencyConverter implements CurrencyConverter {
     private static final int CURRENCIES_COUNT = Currency.values().length;

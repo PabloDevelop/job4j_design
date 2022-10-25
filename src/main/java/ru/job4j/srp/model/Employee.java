@@ -1,4 +1,4 @@
-package srp.model;
+package ru.job4j.srp.model;
 
 import java.util.Calendar;
 import java.util.Objects;

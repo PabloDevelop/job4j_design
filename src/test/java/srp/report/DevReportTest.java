@@ -1,10 +1,12 @@
 package srp.report;
 
 import org.junit.jupiter.api.Test;
-import srp.formatter.DateTimeParser;
-import srp.formatter.ReportDateTimeParser;
-import srp.model.Employee;
-import srp.store.MemStore;
+import ru.job4j.srp.formatter.DateTimeParser;
+import ru.job4j.srp.formatter.ReportDateTimeParser;
+import ru.job4j.srp.model.Employee;
+import ru.job4j.srp.report.DevReport;
+import ru.job4j.srp.report.Report;
+import ru.job4j.srp.store.MemStore;
 import java.util.Calendar;
 import static org.assertj.core.api.Assertions.assertThat;
 

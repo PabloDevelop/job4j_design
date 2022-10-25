@@ -1,9 +1,8 @@
-package srp.report;
+package ru.job4j.srp.report;
 
-import srp.formatter.DateTimeParser;
-import srp.model.Employee;
-import srp.store.Store;
-import java.util.Calendar;
+import ru.job4j.srp.model.Employee;
+import ru.job4j.srp.store.Store;
+
 import java.util.Comparator;
 import java.util.function.Predicate;
 

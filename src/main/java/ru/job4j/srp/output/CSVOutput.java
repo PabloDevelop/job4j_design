@@ -1,4 +1,4 @@
-package srp.output;
+package ru.job4j.srp.output;
 
 import java.io.FileWriter;
 import java.io.IOException;

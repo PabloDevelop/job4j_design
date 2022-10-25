@@ -1,8 +1,10 @@
 package srp.report;
 
 import org.junit.jupiter.api.Test;
-import srp.model.Employee;
-import srp.store.MemStore;
+import ru.job4j.srp.model.Employee;
+import ru.job4j.srp.report.HRReport;
+import ru.job4j.srp.report.Report;
+import ru.job4j.srp.store.MemStore;
 import static org.assertj.core.api.Assertions.*;
 import java.util.Calendar;
 import java.util.Comparator;

@@ -1,15 +1,17 @@
 package srp.report;
 
 import org.junit.jupiter.api.Test;
-import srp.currency.CurrencyConverter;
-import srp.currency.InMemoryCurrencyConverter;
-import srp.formatter.DateTimeParser;
-import srp.formatter.ReportDateTimeParser;
-import srp.model.Employee;
-import srp.store.MemStore;
+import ru.job4j.srp.currency.CurrencyConverter;
+import ru.job4j.srp.currency.InMemoryCurrencyConverter;
+import ru.job4j.srp.formatter.DateTimeParser;
+import ru.job4j.srp.formatter.ReportDateTimeParser;
+import ru.job4j.srp.model.Employee;
+import ru.job4j.srp.report.AccReport;
+import ru.job4j.srp.report.Report;
+import ru.job4j.srp.store.MemStore;
 import static org.assertj.core.api.Assertions.*;
-import static srp.currency.Currency.RUB;
-import static srp.currency.Currency.USD;
+import static ru.job4j.srp.currency.Currency.RUB;
+import static ru.job4j.srp.currency.Currency.USD;
 import java.util.Calendar;
 
 public class AccReportTest {

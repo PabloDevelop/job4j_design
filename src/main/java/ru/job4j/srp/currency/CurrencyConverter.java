@@ -1,4 +1,4 @@
-package srp.currency;
+package ru.job4j.srp.currency;
 
 public interface CurrencyConverter {
     double convert(Currency source, double sourceValue, Currency target);

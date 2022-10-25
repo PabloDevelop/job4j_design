@@ -1,15 +1,13 @@
-package srp.report;
+package ru.job4j.srp.report;
 
-import srp.currency.CurrencyConverter;
-import srp.currency.InMemoryCurrencyConverter;
-import srp.formatter.DateTimeParser;
-import srp.model.Employee;
-import srp.store.Store;
+import ru.job4j.srp.currency.Currency;
+import ru.job4j.srp.currency.CurrencyConverter;
+import ru.job4j.srp.formatter.DateTimeParser;
+import ru.job4j.srp.model.Employee;
+import ru.job4j.srp.store.Store;
+
 import java.util.Calendar;
 import java.util.function.Predicate;
-
-import static srp.currency.Currency.RUB;
-import static srp.currency.Currency.USD;
 
 public class AccReport implements Report {
 
@@ -33,7 +31,7 @@ public class AccReport implements Report {
             text.append(employee.getName()).append(";")
                     .append(dateTimeParser.parse(employee.getHired())).append(";")
                     .append(dateTimeParser.parse(employee.getFired())).append(";")
-                    .append(converter.convert(RUB, employee.getSalary(), USD)).append(";")
+                    .append(converter.convert(Currency.RUB, employee.getSalary(), Currency.USD)).append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();

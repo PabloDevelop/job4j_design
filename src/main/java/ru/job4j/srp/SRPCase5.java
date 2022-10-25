@@ -1,4 +1,4 @@
-package srp;
+package ru.job4j.srp;
 
 public class SRPCase5 {
     private static SRPCase5 instance;
