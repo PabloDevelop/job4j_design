@@ -12,6 +12,14 @@ public class SRPCase4 {
 
     private int phone;
 
+    public SRPCase4(int age, String name, String city, char gender, int phone) {
+        this.age = age;
+        this.name = name;
+        this.city = city;
+        this.gender = gender;
+        this.phone = phone;
+    }
+
     public int getAge() {
         return age;
     }
@@ -49,14 +57,6 @@ public class SRPCase4 {
     }
 
     public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
-    public SRPCase4(int age, String name, String city, char gender, int phone) {
-        this.age = age;
-        this.name = name;
-        this.city = city;
-        this.gender = gender;
         this.phone = phone;
     }
 
