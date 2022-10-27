@@ -1,8 +1,15 @@
 package ru.job4j.srp.model;
 
+import javax.xml.bind.annotation.XmlType;
 import java.util.Calendar;
 import java.util.Objects;
 
+@XmlType(propOrder = {
+        "name",
+        "hired",
+        "fired",
+        "salary"
+})
 public class Employee {
     private String name;
     private Calendar hired;

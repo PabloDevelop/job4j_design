@@ -9,6 +9,9 @@ import ru.job4j.srp.model.Employee;
 import ru.job4j.srp.report.AccReport;
 import ru.job4j.srp.report.Report;
 import ru.job4j.srp.store.MemStore;
+
+import javax.xml.bind.JAXBException;
+
 import static org.assertj.core.api.Assertions.*;
 import static ru.job4j.srp.currency.Currency.RUB;
 import static ru.job4j.srp.currency.Currency.USD;
@@ -16,7 +19,7 @@ import java.util.Calendar;
 
 public class AccReportTest {
     @Test
-    public void whenHRReportSalarySorted() {
+    public void whenHRReportSalarySorted() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();
