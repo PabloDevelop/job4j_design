@@ -1,4 +1,4 @@
-package srp.report;
+package ru.job4j.srp.report;
 
 import org.junit.jupiter.api.Test;
 import ru.job4j.srp.currency.CurrencyConverter;
@@ -19,7 +19,7 @@ import java.util.Calendar;
 
 public class AccReportTest {
     @Test
-    public void whenHRReportSalarySorted() throws JAXBException {
+    public void whenHRReportSalarySorted() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         CurrencyConverter converter = new InMemoryCurrencyConverter();

@@ -1,8 +1,6 @@
 package ru.job4j.srp.report;
 
 import org.junit.Test;
-import ru.job4j.srp.formatter.DateTimeParser;
-import ru.job4j.srp.formatter.ReportDateTimeParser;
 import ru.job4j.srp.model.Employee;
 import ru.job4j.srp.store.MemStore;
 import javax.xml.bind.JAXBException;
@@ -17,10 +15,9 @@ public class XMLReportTest {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
-        DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         store.add(worker);
-        Report engine = new XMLReport(store, parser);
+        Report engine = new XMLReport(store);
         StringBuilder expect = new StringBuilder()
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
                 .append(String.format("%n%s%n", "<Store>"))
