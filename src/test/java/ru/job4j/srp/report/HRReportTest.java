@@ -2,19 +2,14 @@ package ru.job4j.srp.report;
 
 import org.junit.jupiter.api.Test;
 import ru.job4j.srp.model.Employee;
-import ru.job4j.srp.report.HRReport;
-import ru.job4j.srp.report.Report;
 import ru.job4j.srp.store.MemStore;
-
-import javax.xml.bind.JAXBException;
-
 import static org.assertj.core.api.Assertions.*;
 import java.util.Calendar;
 import java.util.Comparator;
 
 public class HRReportTest {
     @Test
-    public void whenHRReportSalarySorted() throws JAXBException {
+    public void whenHRReportSalarySorted() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);

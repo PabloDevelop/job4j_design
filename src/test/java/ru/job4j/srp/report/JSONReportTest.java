@@ -3,26 +3,21 @@ package ru.job4j.srp.report;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
-import ru.job4j.srp.formatter.DateTimeParser;
-import ru.job4j.srp.formatter.ReportDateTimeParser;
 import ru.job4j.srp.model.Employee;
 import ru.job4j.srp.store.MemStore;
-
-import javax.xml.bind.JAXBException;
 import java.util.Calendar;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class JSONReportTest {
 
     @Test
-    public void whenJSON() throws JAXBException {
+    public void whenJSON() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Gson gson = new GsonBuilder().create();
         Employee worker = new Employee("Ivan", now, now, 100);
-        DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         store.add(worker);
-        Report engine = new JSONReport(store, parser, gson);
+        Report engine = new JSONReport(store);
         StringBuilder expect = new StringBuilder()
                 .append(String.format("[{\"name\":\"%s\",", worker.getName()))
                 .append(String.format("\"hired\":%s,", gson.toJson(worker.getHired())))

@@ -4,18 +4,14 @@ import org.junit.jupiter.api.Test;
 import ru.job4j.srp.formatter.DateTimeParser;
 import ru.job4j.srp.formatter.ReportDateTimeParser;
 import ru.job4j.srp.model.Employee;
-import ru.job4j.srp.report.DevReport;
-import ru.job4j.srp.report.Report;
 import ru.job4j.srp.store.MemStore;
-
-import javax.xml.bind.JAXBException;
 import java.util.Calendar;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DevReportTest {
 
     @Test
-    public void whenDevReport() throws JAXBException {
+    public void whenDevReport() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
