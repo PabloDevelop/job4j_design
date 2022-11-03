@@ -1,13 +1,21 @@
 package ru.job4j.lsp;
 
-public class ControlQuality {
-    private Store store;
+import ru.job4j.lsp.food.Food;
+import ru.job4j.lsp.store.Store;
+import java.util.List;
 
-    public ControlQuality(Store store) {
-        this.store = store;
+public class ControlQuality {
+    private List<Store> stores;
+
+    public ControlQuality(List<Store> stores) {
+        this.stores = stores;
     }
 
-    private void checkFood(Food food) {
-       store.check(food);
+    public void sortFood(Food food) {
+        for (Store store : stores) {
+            if (store.add(food)) {
+                break;
+            }
+        }
     }
 }
