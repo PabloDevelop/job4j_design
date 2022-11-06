@@ -2,10 +2,7 @@ package ru.job4j.lsp;
 
 import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
-import ru.job4j.lsp.food.Cheese;
-import ru.job4j.lsp.food.Cucumber;
-import ru.job4j.lsp.food.Food;
-import ru.job4j.lsp.food.Potato;
+import ru.job4j.lsp.food.*;
 import ru.job4j.lsp.store.Shop;
 import ru.job4j.lsp.store.Store;
 import ru.job4j.lsp.store.Trash;
@@ -22,7 +19,7 @@ public class ControlQualityTest {
 
     @Test
     public void whenToWarehouse() {
-        Food bread = new Food("White bread", LocalDateTime.now().plusDays(10),
+        Food bread = new Tomato("Tomato", LocalDateTime.now().plusDays(10),
                 LocalDateTime.now().minusDays(2), 100, 25);
         control.sortFood(bread);
         assertThat(warehouse.showAllFood().contains(bread)).isTrue();
@@ -30,7 +27,7 @@ public class ControlQualityTest {
 
     @Test
     public void whenToShop() {
-        Food bread = new Food("White bread", LocalDateTime.now().plusDays(10),
+        Food bread = new Tomato("Tomato", LocalDateTime.now().plusDays(10),
                 LocalDateTime.now().minusDays(10), 100, 25);
         control.sortFood(bread);
         assertThat(shop.showAllFood().contains(bread)).isTrue();
@@ -38,7 +35,7 @@ public class ControlQualityTest {
 
     @Test
     public void whenToShopWithDiscount() {
-        Food bread = new Food("White bread", LocalDateTime.now().plusDays(2),
+        Food bread = new Tomato("Tomato", LocalDateTime.now().plusDays(2),
                 LocalDateTime.now().minusDays(10), 100, 25);
         control.sortFood(bread);
         assertThat(shop.showAllFood().get(0).getPrice()).isEqualTo(75);
@@ -46,7 +43,7 @@ public class ControlQualityTest {
 
     @Test
     public void whenToTrash() {
-        Food bread = new Food("White bread", LocalDateTime.now().plusDays(1),
+        Food bread = new Tomato("Tomato", LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().minusDays(10), 100, 25);
         control.sortFood(bread);
         assertThat(trash.showAllFood().contains(bread)).isTrue();
@@ -58,7 +55,7 @@ public class ControlQualityTest {
                 LocalDateTime.now().minusDays(2), 100, 25);
         Food cucumber = new Cucumber("Cucumber", LocalDateTime.now().plusDays(10),
                 LocalDateTime.now().minusDays(10), 100, 25);
-        Food tomato = new Food("Tomato", LocalDateTime.now().plusDays(2),
+        Food tomato = new Tomato("Tomato", LocalDateTime.now().plusDays(2),
                 LocalDateTime.now().minusDays(10), 100, 25);
         Food cheese = new Cheese("Cheese", LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().minusDays(10), 100, 25);

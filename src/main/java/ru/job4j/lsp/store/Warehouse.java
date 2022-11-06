@@ -2,24 +2,18 @@ package ru.job4j.lsp.store;
 
 import static ru.job4j.lsp.Constants.GOOD_QUALITY;
 import ru.job4j.lsp.food.Food;
-import java.util.ArrayList;
-import java.util.List;
+import ru.job4j.lsp.util.ExpirationCalculator;
+import ru.job4j.lsp.util.LocalDateTimeExpirationCalculator;
 
-public class Warehouse extends AbstractStore implements Store {
-    private final List<Food> warehouseStorage = new ArrayList<>();
+public class Warehouse extends AbstractStore {
+    private final ExpirationCalculator<Food> expCalc;
 
-    @Override
-    public boolean add(Food food) {
-        boolean rsl = false;
-        double expDays = count(food);
-        if (expDays > GOOD_QUALITY) {
-            rsl = warehouseStorage.add(food);
-        }
-        return rsl;
+    public Warehouse() {
+        this.expCalc = new LocalDateTimeExpirationCalculator();
     }
 
     @Override
-    public List<Food> showAllFood() {
-        return warehouseStorage;
+    public boolean isExpired(Food food) {
+        return expCalc.count(food) > GOOD_QUALITY;
     }
 }

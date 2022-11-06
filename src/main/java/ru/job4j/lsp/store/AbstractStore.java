@@ -1,12 +1,19 @@
 package ru.job4j.lsp.store;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 import ru.job4j.lsp.food.Food;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractStore implements Store {
-    protected static double count(Food food) {
-        return (DAYS.between(food.getExpiryDate(), LocalDateTime.now()) * 100.00)
-                / DAYS.between(food.getExpiryDate(), food.getCreateDate());
+    private final List<Food> storage = new ArrayList<>();
+
+    @Override
+    public boolean add(Food food) {
+        return isExpired(food) ? storage.add(food) : false;
+
+    }
+    @Override
+    public List<Food> showAllFood() {
+        return List.copyOf(storage);
     }
 }
