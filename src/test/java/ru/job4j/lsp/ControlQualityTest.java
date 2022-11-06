@@ -7,13 +7,16 @@ import ru.job4j.lsp.store.Shop;
 import ru.job4j.lsp.store.Store;
 import ru.job4j.lsp.store.Trash;
 import ru.job4j.lsp.store.Warehouse;
+import ru.job4j.lsp.util.ExpirationCalculator;
+import ru.job4j.lsp.util.LocalDateTimeExpirationCalculator;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class ControlQualityTest {
-    Store shop = new Shop();
-    Store warehouse = new Warehouse();
-    Store trash = new Trash();
+    ExpirationCalculator<LocalDateTime> expCalc = new LocalDateTimeExpirationCalculator();
+    Store shop = new Shop(expCalc);
+    Store warehouse = new Warehouse(expCalc);
+    Store trash = new Trash(expCalc);
     ControlQuality control = new ControlQuality(List.of(shop, warehouse, trash));
 
 

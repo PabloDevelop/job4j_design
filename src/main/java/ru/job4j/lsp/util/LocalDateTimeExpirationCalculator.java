@@ -1,13 +1,12 @@
 package ru.job4j.lsp.util;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import ru.job4j.lsp.food.Food;
 import java.time.LocalDateTime;
 
-public class LocalDateTimeExpirationCalculator implements ExpirationCalculator<Food> {
+public class LocalDateTimeExpirationCalculator implements ExpirationCalculator<LocalDateTime> {
     @Override
-    public double count(Food food) {
-        return (DAYS.between(food.getExpiryDate(), LocalDateTime.now()) * 100.00)
-                / DAYS.between(food.getExpiryDate(), food.getCreateDate());
+    public double count(LocalDateTime expiryDate, LocalDateTime createDate) {
+        return (DAYS.between(expiryDate, LocalDateTime.now()) * 100.00)
+                / DAYS.between(expiryDate, createDate);
     }
 }
