@@ -8,6 +8,9 @@ public class Truck implements Transport {
     private final String regNumber;
 
     public Truck(String name, String regNumber, int size) {
+        if (size <= 1) {
+            throw new IllegalArgumentException();
+        }
         this.name = name;
         this.regNumber = regNumber;
         this.size = size;

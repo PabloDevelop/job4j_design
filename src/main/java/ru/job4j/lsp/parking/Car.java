@@ -3,19 +3,18 @@ package ru.job4j.lsp.parking;
 import java.util.Objects;
 
 public class Car implements Transport {
-    private final int size;
+    private static final int SIZE = 1;
     private final String name;
     private final String regNumber;
 
-    public Car(String name, String regNumber, int size) {
+    public Car(String name, String regNumber) {
         this.name = name;
         this.regNumber = regNumber;
-        this.size = size;
     }
 
     @Override
     public int getSize() {
-        return size;
+        return SIZE;
     }
 
     public String getName() {
@@ -35,20 +34,19 @@ public class Car implements Transport {
             return false;
         }
         Car car = (Car) o;
-        return size == car.size
-                && Objects.equals(name, car.name)
+        return Objects.equals(name, car.name)
                 && Objects.equals(regNumber, car.regNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(size, name, regNumber);
+        return Objects.hash(name, regNumber);
     }
 
     @Override
     public String toString() {
         return "Car{"
-                + "size=" + size
+                + "size=" + SIZE
                 + ", name='" + name
                 + '\''
                 + ", regNumber='" + regNumber
