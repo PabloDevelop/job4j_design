@@ -1,5 +1,6 @@
 package ru.job4j.lsp.parking;
 
+import static ru.job4j.lsp.parking.Car.*;
 import java.util.Objects;
 
 public class Truck implements Transport {
@@ -8,7 +9,7 @@ public class Truck implements Transport {
     private final String regNumber;
 
     public Truck(String name, String regNumber, int size) {
-        if (size <= 1) {
+        if (size <= SIZE) {
             throw new IllegalArgumentException();
         }
         this.name = name;

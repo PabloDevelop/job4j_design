@@ -3,9 +3,9 @@ package ru.job4j.lsp.parking;
 import java.util.Objects;
 
 public class Car implements Transport {
-    private static final int SIZE = 1;
     private final String name;
     private final String regNumber;
+    static final int SIZE = 1;
 
     public Car(String name, String regNumber) {
         this.name = name;

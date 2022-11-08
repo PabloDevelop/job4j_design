@@ -1,10 +1,8 @@
 package ru.job4j.lsp.parking;
 
-import static java.lang.System.in;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 import java.util.List;
-import java.util.Scanner;
 
 public class MainParkTest {
     @Test
@@ -62,7 +60,6 @@ public class MainParkTest {
         Transport truck2 = new Truck("VOLVO", "O8899AS", 3);
         Transport truck3 = new Truck("VOLVO", "O8899AS", 4);
         Parking parking = new MainPark(1, 5);
-        Scanner scanner = new Scanner(in);
         parking.park(car1);
         parking.park(car2);
         parking.park(truck1);
