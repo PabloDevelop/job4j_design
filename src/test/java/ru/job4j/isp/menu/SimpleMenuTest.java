@@ -44,7 +44,7 @@ public class SimpleMenuTest {
         System.setOut(now);
         menuPrinter.print(menu);
         System.setOut(old);
-        String expected = String.format("%n%s%n%s", "1. Сходить в магазин", "----1.1. Купить продукты");
+        String expected = String.format("%s%n%s%n", "1. Сходить в магазин", "--1.1. Купить продукты");
         assertThat(output.toString()).isEqualTo(expected);
     }
 

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TODOApp {
+    private static final int MENU_LVL_FIRST = 1;
+    private static final int MENU_LVL_SECOND = 2;
+    private static final int MENU_LVL_THIRD = 3;
     private static final Scanner INPUT = new Scanner(System.in);
     private static final Menu SIMPLE_MENU = new SimpleMenu();
     private static final MenuPrinter SIMPLE_MENU_PRINTER = new SimpleMenuPrinter();
@@ -18,7 +21,7 @@ public class TODOApp {
         while (run) {
             showMenu();
             int select = Integer.parseInt(INPUT.nextLine());
-            if (select <= 0 || select > 3) {
+            if (select < MENU_LVL_FIRST || select > MENU_LVL_THIRD) {
                 System.out.println("Некорректный ввод, введите пожалуйста в диапазоне: 1 - 3");
                 continue;
             }
@@ -34,8 +37,8 @@ public class TODOApp {
 
     private static boolean actions(int select) {
         boolean rsl = true;
-        if (select == 1) {
-            System.out.println("- Параметры задачи - ");
+        if (select == MENU_LVL_FIRST) {
+            System.out.println("- Параметры задачи -");
             System.out.println("Введите ROOT или имя родительской задачи:");
             String parentName = INPUT.nextLine();
             System.out.println("Введите имя текущей задачи:");
@@ -46,12 +49,12 @@ public class TODOApp {
                 SIMPLE_MENU.add(parentName, currentName, STUB_ACTION);
             }
             System.out.println("Задача добавлена");
-        } else if (select == 2) {
+        } else if (select == MENU_LVL_SECOND) {
             System.out.println("Перечень текущий задач:");
             SIMPLE_MENU_PRINTER.print(SIMPLE_MENU);
-        } else if (select == 3) {
+        } else if (select == MENU_LVL_THIRD) {
             rsl = false;
-            System.out.println("Выход");
+            System.out.println("- Выход -");
         }
         return rsl;
     }

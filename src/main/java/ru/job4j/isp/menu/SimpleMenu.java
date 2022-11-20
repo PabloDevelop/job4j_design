@@ -27,15 +27,15 @@ public class SimpleMenu implements Menu {
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         SimpleMenuItem simpleMenuItem = new SimpleMenuItem(childName, actionDelegate);
-        boolean rsl = false;
-        if (Objects.equals(parentName, ROOT)) {
-            rootElements.add(simpleMenuItem);
-        } else if (findItem(parentName).isPresent() && findItem(childName).isEmpty()) {
-            rsl = findItem(parentName).get().menuItem.getChildren().add(simpleMenuItem);
-        } else if (findItem(parentName).isPresent() && findItem(childName).isPresent()) {
-            int index = findItem(parentName).get().menuItem.getChildren().indexOf(childName);
-            findItem(parentName).get().menuItem.getChildren().set(index, simpleMenuItem);
-            rsl = true;
+        boolean rsl;
+        if (findItem(childName).isPresent()) {
+            rsl = false;
+        } else if (Objects.equals(parentName, ROOT)) {
+            rsl = rootElements.add(simpleMenuItem);
+        } else {
+            rsl = findItem(parentName)
+                    .map(itemInfo -> itemInfo.menuItem.getChildren().add(simpleMenuItem))
+                    .orElse(false);
         }
         return rsl;
     }
@@ -48,15 +48,11 @@ public class SimpleMenu implements Menu {
      */
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
-        Optional<ItemInfo> itemInfo = findItem(itemName);
-        MenuItemInfo menuItemInfo = new MenuItemInfo(
-                itemInfo.get().menuItem.getName(),
-                itemInfo.get().menuItem.getChildren().stream()
-                        .map(MenuItem::getName)
-                        .collect(Collectors.toList()),
-                itemInfo.get().menuItem.getActionDelegate(),
-                itemInfo.get().number);
-        return Optional.of(menuItemInfo);
+        return findItem(itemName).map(i -> new MenuItemInfo(
+                i.menuItem.getName(), i.menuItem.getChildren().stream()
+                .map(MenuItem::getName).collect(Collectors.toList()),
+                i.menuItem.getActionDelegate(), i.number
+        ));
     }
 
     /**
@@ -96,6 +92,7 @@ public class SimpleMenu implements Menu {
             rsl = dfsIterator.next();
             if (name.equals(rsl.menuItem.getName())) {
                 itemInfo = Optional.of(rsl);
+                break;
             }
         }
         return itemInfo;
