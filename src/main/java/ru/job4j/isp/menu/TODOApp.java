@@ -44,13 +44,13 @@ public class TODOApp {
             System.out.println("Введите имя текущей задачи:");
             String currentName = INPUT.nextLine();
             if (parentName.equals("ROOT")) {
-                SIMPLE_MENU.add(Menu.ROOT, currentName, STUB_ACTION);
+                rsl = SIMPLE_MENU.add(Menu.ROOT, currentName, STUB_ACTION);
             } else {
-                SIMPLE_MENU.add(parentName, currentName, STUB_ACTION);
+                rsl = SIMPLE_MENU.add(parentName, currentName, STUB_ACTION);
             }
-            System.out.println("Задача добавлена");
+            System.out.println(rsl ? "Задача добавлена" : "Задача дублируется");
         } else if (select == MENU_LVL_SECOND) {
-            System.out.println("Перечень текущий задач:");
+            System.out.println("Перечень текущих задач:");
             SIMPLE_MENU_PRINTER.print(SIMPLE_MENU);
         } else if (select == MENU_LVL_THIRD) {
             rsl = false;
