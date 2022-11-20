@@ -38,17 +38,18 @@ public class TODOApp {
     private static boolean actions(int select) {
         boolean rsl = true;
         if (select == MENU_LVL_FIRST) {
+            boolean add;
             System.out.println("- Параметры задачи -");
             System.out.println("Введите ROOT или имя родительской задачи:");
             String parentName = INPUT.nextLine();
             System.out.println("Введите имя текущей задачи:");
             String currentName = INPUT.nextLine();
             if (parentName.equals("ROOT")) {
-                rsl = SIMPLE_MENU.add(Menu.ROOT, currentName, STUB_ACTION);
+                add = SIMPLE_MENU.add(Menu.ROOT, currentName, STUB_ACTION);
             } else {
-                rsl = SIMPLE_MENU.add(parentName, currentName, STUB_ACTION);
+                add = SIMPLE_MENU.add(parentName, currentName, STUB_ACTION);
             }
-            System.out.println(rsl ? "Задача добавлена" : "Задача дублируется");
+            System.out.println(add ? "Задача добавлена" : "Такая задача уже есть");
         } else if (select == MENU_LVL_SECOND) {
             System.out.println("Перечень текущих задач:");
             SIMPLE_MENU_PRINTER.print(SIMPLE_MENU);
