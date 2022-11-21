@@ -32,7 +32,7 @@ public class SimpleMenuTest {
     }
 
     @Test
-    public void testString() {
+    public void whenAddThenPrintToConsoleSame() {
         Menu menu = new SimpleMenu();
         MenuPrinter menuPrinter = new SimpleMenuPrinter();
         menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
@@ -49,7 +49,7 @@ public class SimpleMenuTest {
     }
 
     @Test
-    public void testSelect() {
+    public void whenAddThenSelectReturnSame() {
         Menu menu = new SimpleMenu();
         menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
         menu.add(Menu.ROOT, "Покормить собаку", STUB_ACTION);

@@ -1,7 +1,6 @@
 package ru.job4j.isp.menu;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Каркас меню.
@@ -48,11 +47,7 @@ public class SimpleMenu implements Menu {
      */
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
-        return findItem(itemName).map(i -> new MenuItemInfo(
-                i.menuItem.getName(), i.menuItem.getChildren().stream()
-                .map(MenuItem::getName).collect(Collectors.toList()),
-                i.menuItem.getActionDelegate(), i.number
-        ));
+        return findItem(itemName).map(i -> new MenuItemInfo(i.menuItem, i.number));
     }
 
     /**
