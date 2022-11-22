@@ -18,4 +18,9 @@ public class ControlQuality {
             }
         }
     }
+
+    public void resort() {
+        stores.forEach(store -> store.showAllFood()
+                .forEach(this::sortFood));
+    }
 }
