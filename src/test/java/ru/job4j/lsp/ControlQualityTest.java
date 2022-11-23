@@ -75,16 +75,22 @@ public class ControlQualityTest {
     public void whenControlToTrashThenResortToShopThenResortToWarehouseThenResortToTrash() {
         Food tomato = new Tomato("Tomato", LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().minusDays(10), 100, 25);
+        Food cheese = new Cheese("Cheese", LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().minusDays(10), 100, 25);
         control.sortFood(tomato);
-        assertThat(trash.showAllFood().contains(tomato)).isTrue();
+        control.sortFood(cheese);
+        assertThat(trash.showAllFood().containsAll(List.of(tomato, cheese))).isTrue();
         trash.showAllFood().get(0).setExpiryDate(LocalDateTime.now().plusDays(2));
         control.resort();
         assertThat(shop.showAllFood().contains(tomato)).isTrue();
         shop.showAllFood().get(0).setExpiryDate(LocalDateTime.now().plusDays(100));
+        trash.showAllFood().get(0).setExpiryDate(LocalDateTime.now().plusDays(2));
         control.resort();
         assertThat(warehouse.showAllFood().contains(tomato)).isTrue();
+        assertThat(shop.showAllFood().contains(cheese)).isTrue();
         warehouse.showAllFood().get(0).setExpiryDate(LocalDateTime.now().minusDays(3));
+        shop.showAllFood().get(0).setExpiryDate(LocalDateTime.now().minusDays(3));
         control.resort();
-        assertThat(trash.showAllFood().contains(tomato)).isTrue();
+        assertThat(trash.showAllFood().containsAll(List.of(tomato, cheese))).isTrue();
     }
 }

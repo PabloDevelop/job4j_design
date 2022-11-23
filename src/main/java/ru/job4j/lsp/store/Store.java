@@ -9,4 +9,6 @@ public interface Store {
     boolean isExpired(Food food);
 
     List<Food> showAllFood();
+
+    List<Food> clear();
 }

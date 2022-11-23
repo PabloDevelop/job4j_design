@@ -2,7 +2,8 @@ package ru.job4j.lsp;
 
 import ru.job4j.lsp.food.Food;
 import ru.job4j.lsp.store.Store;
-import java.util.List;
+
+import java.util.*;
 
 public class ControlQuality {
     private List<Store> stores;
@@ -20,7 +21,10 @@ public class ControlQuality {
     }
 
     public void resort() {
-        stores.forEach(store -> store.showAllFood()
-                .forEach(this::sortFood));
+        List<Food> foodCache = new ArrayList<>();
+        for (Store store : stores) {
+            foodCache.addAll(store.clear());
+        }
+        foodCache.forEach(this::sortFood);
     }
 }
